@@ -1,0 +1,47 @@
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  background-color: #009688;
+  ;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  text-align: center;
+}
+
+.title {
+  color: rgb(235, 231, 231);
+  font-size: 1.3em;
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.joke {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+}
+
+.jokeLoaded {
+  background-color: #0ea596;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.jokeValue {
+  color: #ffff;
+  font-size: 1.3em;
+}
