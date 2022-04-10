@@ -1,9 +1,11 @@
-import styles from "./App.module.css";
-import useFetchGet from "./hooks/useFetchGet";
-import Spinner from "./components/Spinner";
-import StyledButton from "./components/Button";
-import { Search } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { useState } from "react";
+import styles from "./App.module.css";
+import ButtonSearch from "./components/ButtonSearch";
+import Joke from "./components/Joke";
+import SelectCategory from "./components/SelectCategory";
+import Title from "./components/Title";
+import useFetchGet from "./hooks/useFetchGet";
 
 const theme = createTheme({
   palette: {
@@ -17,43 +19,28 @@ const theme = createTheme({
 });
 
 function App() {
-  const { setIsFetching, isLoading, error, data } = useFetchGet(
-    "https://api.chucknorris.io/jokes/random"
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const { isLoading, error, data, fetchAgain } = useFetchGet(
+    selectedCategory === ""
+      ? "https://api.chucknorris.io/jokes/random"
+      : `https://api.chucknorris.io/jokes/random?category=${selectedCategory}`,
+    false
   );
-
-  const handlerGetJoke = () => {
-    setIsFetching(true);
-  };
-
-  console.log(data);
 
   return (
     <ThemeProvider theme={theme}>
       <div className={styles.app}>
         <div className={styles.container}>
-          <div className={styles.title}>
-            <h1>Random Joke Generator</h1>
-          </div>
+          <Title />
           <div className={styles.search}>
-            <StyledButton
-              onClick={handlerGetJoke}
-              color="primary"
-              text="Szukaj"
-              disabled={isLoading ? true : false}
-              icon={<Search />}
+            <SelectCategory
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
             />
+            <ButtonSearch isLoading={isLoading} onChandleClick={fetchAgain} />
           </div>
-          <div
-            className={`${styles.joke} ${
-              !isLoading && !error && data ? styles.jokeLoaded : ""
-            }`}
-          >
-            {isLoading && <Spinner />}
-            {!isLoading && !error && data && (
-              <p className={styles.jokeValue}>{data.value}</p>
-            )}
-            {error && <p>{error}</p>}
-          </div>
+          <Joke isLoading={isLoading} error={error} jokeData={data?.value} />
         </div>
       </div>
     </ThemeProvider>

@@ -1,0 +1,19 @@
+.joke {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+  
+.jokeLoaded {
+    background-color: #0ea596;
+    padding: 20px;
+    border-radius: 10px;
+}
+  
+.jokeValue {
+    color: #ffff;
+    font-size: 1.3em;
+}
+  

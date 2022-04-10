@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useFetchGet = (url) => {
-  const [isFetching, setIsFetching] = useState(false);
+const useFetchGet = (url, startOnInitial = true) => {
+  const [isFetching, setIsFetching] = useState(startOnInitial);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [data, setData] = useState(null);
@@ -34,11 +34,15 @@ const useFetchGet = (url) => {
     })();
   }, [isFetching, url]);
 
+  const fetchAgain = () => {
+    setIsFetching(true);
+  };
+
   return {
-    setIsFetching,
     isLoading,
     error,
     data,
+    fetchAgain,
   };
 };
 
