@@ -21,7 +21,7 @@ const StyledSelect = ({
         {...props}
       >
         <MenuItem value="">NONE</MenuItem>
-        {items.map((item, index) => {
+        {items?.map((item, index) => {
           return (
             <MenuItem value={item} key={index}>
               {item.toUpperCase()}
