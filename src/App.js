@@ -68,7 +68,7 @@ function App() {
             {showQuery && <QuerySearch ref={queryInputRef} />}
             <ButtonSearch isLoading={isLoading} onChandleClick={fetchAgain} />
           </div>
-          <Joke isLoading={isLoading} error={error} jokeData={data?.value} />
+          <Joke isLoading={isLoading} error={error} jokeData={data} />
         </div>
       </div>
     </ThemeProvider>
